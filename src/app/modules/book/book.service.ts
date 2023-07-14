@@ -7,6 +7,7 @@ import { Book } from './book.model'
 import { IGenericResponse } from '../../../interfaces/common'
 import ApiError from '../../../errors/ApiError'
 import { JwtPayload } from 'jsonwebtoken'
+import { User } from '../users/users.model'
 
 const createBook = async (
   payload: IBook,
@@ -104,10 +105,55 @@ const deleteBook = async (id: string, ownerInfo: JwtPayload | null) => {
   return result
 }
 
+const addToWishlist = async (id: string, ownerInfo: JwtPayload | null) => {
+  await User.updateOne(
+    {
+      _id: ownerInfo?._id,
+    },
+    { $addToSet: { wishlist: id } }
+  )
+}
+const addToCurrentlyReading = async (
+  id: string,
+  ownerInfo: JwtPayload | null
+) => {
+  await User.updateOne(
+    {
+      _id: ownerInfo?._id,
+    },
+    { $addToSet: { currentlyReading: id } }
+  )
+}
+const addToPlanToReadSoon = async (
+  id: string,
+  ownerInfo: JwtPayload | null
+) => {
+  await User.updateOne(
+    {
+      _id: ownerInfo?._id,
+    },
+    { $addToSet: { planToReadSoon: id } }
+  )
+}
+const setFinishedReading = async (id: string, ownerInfo: JwtPayload | null) => {
+  await User.updateOne(
+    {
+      _id: ownerInfo?._id,
+    },
+    {
+      $pull: { wishlist: id, planToReadSoon: id, currentlyReading: id },
+    }
+  )
+}
+
 export const BookService = {
   createBook,
   getAllBooks,
   getSingleBook,
   updateBook,
   deleteBook,
+  addToWishlist,
+  addToCurrentlyReading,
+  addToPlanToReadSoon,
+  setFinishedReading,
 }

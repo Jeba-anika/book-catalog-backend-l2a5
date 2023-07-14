@@ -69,10 +69,57 @@ const deleteBook = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const addToWishlist = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const userInfo = req.user
+  await BookService.addToWishlist(id, userInfo)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Added to wishlist',
+  })
+})
+const addToCurrentlyReading = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id
+    const userInfo = req.user
+    await BookService.addToCurrentlyReading(id, userInfo)
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Added to currently reading',
+    })
+  }
+)
+const addToPlanToReadSoon = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const userInfo = req.user
+  await BookService.addToPlanToReadSoon(id, userInfo)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Added to plan to read soon',
+  })
+})
+const setFinishedReading = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const userInfo = req.user
+  await BookService.setFinishedReading(id, userInfo)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Removed from wishlist',
+  })
+})
+
 export const BookController = {
   createBook,
   getAllBooks,
   getSingleBook,
   updateBook,
   deleteBook,
+  addToWishlist,
+  addToCurrentlyReading,
+  addToPlanToReadSoon,
+  setFinishedReading,
 }

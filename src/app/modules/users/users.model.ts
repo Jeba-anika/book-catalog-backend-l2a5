@@ -7,9 +7,28 @@ import { roles } from './users.constants'
 
 const userSchema = new Schema<IUser>(
   {
+    _id: Schema.Types.ObjectId,
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: roles, required: true },
+    wishlist: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+      },
+    ],
+    currentlyReading: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+      },
+    ],
+    planToReadSoon: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+      },
+    ],
   },
   {
     timestamps: true,

@@ -6,7 +6,7 @@ export type IBook = {
   author: string
   genre: string
   publicationDate: string
-  reviews?: string[]
+  reviews?: Types.Array<string>
   owner: IUser | Types.ObjectId
 }
 
