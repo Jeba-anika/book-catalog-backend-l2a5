@@ -26,4 +26,9 @@ export const cowFilterableFields = [
   'minPrice',
   'maxPrice',
 ]
-export const cowSearchableFields = ['category', 'location', 'breed']
+export const bookSearchableFields = [
+  'title',
+  'genre',
+  'author',
+  'publicationDate',
+]

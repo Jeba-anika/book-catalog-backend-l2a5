@@ -18,6 +18,7 @@ const auth =
         token,
         config.jwt.jwt_secret as Secret
       )
+      console.log(verifiedUser)
       req.user = verifiedUser
       if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
         throw new ApiError(403, 'Forbidden')

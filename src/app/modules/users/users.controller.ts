@@ -17,28 +17,6 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
-const getUserProfile = catchAsync(async (req: Request, res: Response) => {
-  const userInfo = req.user
-  const result = await UserService.getUserProfile(userInfo)
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: "User's information retrieved successfully",
-    data: result,
-  })
-})
-const updateUserProfile = catchAsync(async (req: Request, res: Response) => {
-  const userInfo = req.user
-  const updatedProfile = req.body
-  const result = await UserService.updateUserProfile(userInfo, updatedProfile)
-  sendResponse(res, {
-    statusCode: 200,
-    success: true,
-    message: "User's information updated successfully",
-    data: result,
-  })
-})
-
 const userLogin = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body
   const result = await UserService.userLogin(loginData)
@@ -72,59 +50,8 @@ const userRefreshToken = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
-const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-  const result = await UserService.getAllUsers()
-  sendResponse<IUser[]>(res, {
-    statusCode: 200,
-    success: true,
-    message: 'Users retrieved successfully',
-    data: result,
-  })
-})
-
-const getSingleUser = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.id
-  const result = await UserService.getSingleUser(id)
-  sendResponse<IUser>(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User retrieved successfully',
-    data: result,
-  })
-})
-
-const updateUser = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.id
-  const updateUser = req.body
-  const result = await UserService.updateUser(id, updateUser)
-  sendResponse<IUser>(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User updated successfully',
-    data: result,
-  })
-})
-
-const deleteUser = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.id
-
-  const result = await UserService.deleteUser(id)
-  sendResponse<IUser>(res, {
-    statusCode: 200,
-    success: true,
-    message: 'User deleted successfully',
-    data: result,
-  })
-})
-
 export const UserController = {
   createUser,
-  getSingleUser,
-  getAllUsers,
-  updateUser,
-  deleteUser,
   userLogin,
   userRefreshToken,
-  getUserProfile,
-  updateUserProfile,
 }

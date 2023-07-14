@@ -16,7 +16,7 @@ export type IGenericResponse<T> = {
 }
 
 export type IGenericLoginInfo = {
-  phoneNumber: string
+  email: string
   password: string
 }
 export type IGenericLoginResponse = {

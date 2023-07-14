@@ -27,6 +27,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     message = simplifiedError.message
     errorMessages = simplifiedError.errorMessages
   } else if (err?.code === 11000) {
+    console.log(err)
     statusCode = 409 // Conflict status code
     message = err.message
     errorMessages = [{ path: '', message: err.message }]

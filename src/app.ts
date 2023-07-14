@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/', router)
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Online cow hut')
+  res.send('Welcome to Book Catalog')
 })
 app.use(globalErrorHandler)
 

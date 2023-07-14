@@ -1,28 +1,15 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { Schema, model } from 'mongoose'
 import { IUser, UserModel } from './users.interface'
-import { roles } from './users.constants'
 import bcrypt from 'bcrypt'
 import config from '../../../config'
+import { roles } from './users.constants'
 
 const userSchema = new Schema<IUser>(
   {
-    phoneNumber: { type: String, required: true, unique: true },
-    role: { type: String, required: true, enum: roles },
-    name: {
-      firstName: {
-        type: String,
-        required: true,
-      },
-      lastName: {
-        type: String,
-        required: true,
-      },
-    },
-    address: { type: String, required: true },
-    budget: { type: Number },
-    income: { type: Number },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    role: { type: String, enum: roles, required: true },
   },
   {
     timestamps: true,
@@ -33,12 +20,9 @@ const userSchema = new Schema<IUser>(
 )
 
 userSchema.statics.isUserExist = async function (
-  phone: string
-): Promise<Pick<IUser, '_id' | 'role' | 'phoneNumber' | 'password'> | null> {
-  return await User.findOne(
-    { phoneNumber: phone },
-    { _id: 1, role: 1, password: 1, phoneNumber: 1 }
-  )
+  email: string
+): Promise<Pick<IUser, '_id' | 'email' | 'password'> | null> {
+  return await User.findOne({ email: email })
 }
 
 userSchema.statics.isPasswordMatched = async function (
