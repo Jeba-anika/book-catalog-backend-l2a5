@@ -7,7 +7,6 @@ import { Book } from './book.model'
 import { IGenericResponse } from '../../../interfaces/common'
 import ApiError from '../../../errors/ApiError'
 import { JwtPayload } from 'jsonwebtoken'
-import { IUser } from '../users/users.interface'
 
 const createBook = async (
   payload: IBook,
@@ -71,41 +70,44 @@ const getAllBooks = async (
   }
 }
 
-// const getSingleCow = async (id: string): Promise<ICow | null> => {
-//   const result = await Cow.findById(id).populate('seller')
-//   return result
-// }
+const getSingleBook = async (id: string): Promise<IBook | null> => {
+  const result = await Book.findById(id).populate('owner')
+  return result
+}
 
-// const updateCow = async (
-//   id: string,
-//   updatedData: Partial<ICow>,
-//   sellerInfo: JwtPayload | null
-// ): Promise<ICow | null> => {
-//   const selectedCow = await Cow.findOne({ _id: id, seller: sellerInfo?._id })
-//   if (!selectedCow) {
-//     throw new ApiError(401, 'Unauthorized access')
-//   }
-//   const result = await Cow.findOneAndUpdate({ _id: id }, updatedData, {
-//     new: true,
-//   }).populate('seller')
-//   return result
-// }
+const updateBook = async (
+  id: string,
+  updatedData: Partial<IBook>,
+  ownerInfo: JwtPayload | null
+): Promise<IBook | null> => {
+  const selectedBook = await Book.findOne({ _id: id, owner: ownerInfo?._id })
+  if (!selectedBook) {
+    throw new ApiError(401, 'Unauthorized access')
+  }
+  const result = await Book.findOneAndUpdate({ _id: id }, updatedData, {
+    new: true,
+  }).populate('owner')
+  return result
+}
 
-// const deleteCow = async (id: string, sellerInfo: JwtPayload | null) => {
-//   const selectedCow = await Cow.findOne({ _id: id, seller: sellerInfo?._id })
-//   if (!selectedCow) {
-//     throw new ApiError(401, 'Unauthorized access')
-//   }
-//   const result = await Cow.findOneAndDelete(
-//     { _id: id },
-//     {
-//       new: true,
-//     }
-//   )
-//   return result
-// }
+const deleteBook = async (id: string, ownerInfo: JwtPayload | null) => {
+  const selectedBook = await Book.findOne({ _id: id, owner: ownerInfo?._id })
+  if (!selectedBook) {
+    throw new ApiError(401, 'Unauthorized access')
+  }
+  const result = await Book.findOneAndDelete(
+    { _id: id },
+    {
+      new: true,
+    }
+  )
+  return result
+}
 
 export const BookService = {
   createBook,
   getAllBooks,
+  getSingleBook,
+  updateBook,
+  deleteBook,
 }

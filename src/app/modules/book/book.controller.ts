@@ -6,7 +6,6 @@ import { BookService } from './book.service'
 import pick from '../../../shared/pick'
 import { cowFilterableFields } from './book.constants'
 import { paginationFields } from '../../../constants/pagination'
-import ApiError from '../../../errors/ApiError'
 
 const createBook = catchAsync(async (req: Request, res: Response) => {
   const userInfo = req.user
@@ -33,44 +32,47 @@ const getAllBooks = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
-// const getSingleCow = catchAsync(async (req: Request, res: Response) => {
-//   const id = req.params.id
-//   const result = await CowService.getSingleCow(id)
-//   sendResponse<ICow>(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: 'Cow retrieved successfully',
-//     data: result,
-//   })
-// })
+const getSingleBook = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const result = await BookService.getSingleBook(id)
+  sendResponse<IBook>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Book retrieved successfully',
+    data: result,
+  })
+})
 
-// const updateCow = catchAsync(async (req: Request, res: Response) => {
-//   const sellerInfo = req.user
-//   const id = req.params.id
+const updateBook = catchAsync(async (req: Request, res: Response) => {
+  const ownerInfo = req.user
+  const id = req.params.id
 
-//   const updatedCow = req.body
-//   const result = await CowService.updateCow(id, updatedCow, sellerInfo)
-//   sendResponse<ICow>(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: 'Cow updated successfully',
-//     data: result,
-//   })
-// })
+  const updatedBook = req.body
+  const result = await BookService.updateBook(id, updatedBook, ownerInfo)
+  sendResponse<IBook>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Book edited successfully',
+    data: result,
+  })
+})
 
-// const deleteCow = catchAsync(async (req: Request, res: Response) => {
-//   const id = req.params.id
-//   const sellerInfo = req.user
-//   const result = await CowService.deleteCow(id, sellerInfo)
-//   sendResponse<ICow>(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: 'Cow deleted successfully',
-//     data: result,
-//   })
-// })
+const deleteBook = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const ownerInfo = req.user
+  const result = await BookService.deleteBook(id, ownerInfo)
+  sendResponse<IBook>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Cow deleted successfully',
+    data: result,
+  })
+})
 
 export const BookController = {
   createBook,
   getAllBooks,
+  getSingleBook,
+  updateBook,
+  deleteBook,
 }
