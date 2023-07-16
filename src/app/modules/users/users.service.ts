@@ -16,9 +16,7 @@ const createUser = async (payload: IUser): Promise<Partial<IUser>> => {
   return others
 }
 
-const userLogin = async (
-  payload: IGenericLoginInfo
-): Promise<IGenericLoginResponse> => {
+const userLogin = async (payload: IGenericLoginInfo): Promise<object> => {
   const { email: userEmail, password } = payload
   const isUserExist = await User.isUserExist(userEmail)
   if (!isUserExist) {
@@ -47,6 +45,8 @@ const userLogin = async (
   return {
     accessToken,
     refreshToken,
+    email,
+    _id,
   }
 }
 

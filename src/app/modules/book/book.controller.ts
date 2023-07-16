@@ -4,7 +4,7 @@ import sendResponse from '../../../shared/sendResponse'
 import { IBook } from './book.interface'
 import { BookService } from './book.service'
 import pick from '../../../shared/pick'
-import { cowFilterableFields } from './book.constants'
+import { bookFilterableFields } from './book.constants'
 import { paginationFields } from '../../../constants/pagination'
 
 const createBook = catchAsync(async (req: Request, res: Response) => {
@@ -20,7 +20,7 @@ const createBook = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getAllBooks = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, cowFilterableFields)
+  const filters = pick(req.query, bookFilterableFields)
   const paginationOptions = pick(req.query, paginationFields)
   const result = await BookService.getAllBooks(filters, paginationOptions)
   sendResponse<IBook[]>(res, {
@@ -64,7 +64,7 @@ const deleteBook = catchAsync(async (req: Request, res: Response) => {
   sendResponse<IBook>(res, {
     statusCode: 200,
     success: true,
-    message: 'Cow deleted successfully',
+    message: 'Book deleted successfully',
     data: result,
   })
 })

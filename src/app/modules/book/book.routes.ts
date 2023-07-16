@@ -4,7 +4,7 @@ import auth from '../../middlewares/auth'
 import { ENUM_USER_ROLES } from '../../enums/user'
 const router = express.Router()
 
-router.get('/:id', auth(ENUM_USER_ROLES.USER), BookController.getSingleBook)
+router.get('/:id', BookController.getSingleBook)
 router.patch('/:id', auth(ENUM_USER_ROLES.USER), BookController.updateBook)
 router.delete('/:id', auth(ENUM_USER_ROLES.USER), BookController.deleteBook)
 router.post(

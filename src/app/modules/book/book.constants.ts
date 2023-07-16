@@ -20,15 +20,5 @@ export const locations = [
   'Mymensingh',
 ]
 
-export const cowFilterableFields = [
-  'searchTerm',
-  'location',
-  'minPrice',
-  'maxPrice',
-]
-export const bookSearchableFields = [
-  'title',
-  'genre',
-  'author',
-  'publicationDate',
-]
+export const bookFilterableFields = ['searchTerm', 'publicationDate', 'genre']
+export const bookSearchableFields = ['title', 'genre', 'author']

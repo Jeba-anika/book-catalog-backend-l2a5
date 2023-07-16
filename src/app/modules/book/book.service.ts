@@ -56,6 +56,7 @@ const getAllBooks = async (
   const whereCondition = andConditions.length > 0 ? { $and: andConditions } : {}
 
   const result = await Book.find(whereCondition)
+    .populate('owner')
     .sort(sortConditions)
     .skip(skip)
     .limit(limit)
