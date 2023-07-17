@@ -107,33 +107,45 @@ const deleteBook = async (id: string, ownerInfo: JwtPayload | null) => {
 }
 
 const addToWishlist = async (id: string, ownerInfo: JwtPayload | null) => {
+  const book = await Book.findById(id)
+  // const user = await User.findById(ownerInfo?._id)
+  // if (book && user) {
+  //   user?.wishlist?.push(book)
+  //   user.save()
+  // } else {
+  //   throw new ApiError(401, 'Some error occurred')
+  // }
   await User.updateOne(
     {
       _id: ownerInfo?._id,
     },
-    { $addToSet: { wishlist: id } }
+    { $addToSet: { wishlist: book } }
   )
 }
 const addToCurrentlyReading = async (
   id: string,
   ownerInfo: JwtPayload | null
 ) => {
-  await User.updateOne(
+  const book = await Book.findById(id)
+
+  await User.findByIdAndUpdate(
     {
       _id: ownerInfo?._id,
     },
-    { $addToSet: { currentlyReading: id } }
+    { $addToSet: { currentlyReading: book } }
   )
 }
 const addToPlanToReadSoon = async (
   id: string,
   ownerInfo: JwtPayload | null
 ) => {
-  await User.updateOne(
+  const book = await Book.findById(id)
+
+  await User.findByIdAndUpdate(
     {
       _id: ownerInfo?._id,
     },
-    { $addToSet: { planToReadSoon: id } }
+    { $addToSet: { planToReadSoon: book } }
   )
 }
 const setFinishedReading = async (id: string, ownerInfo: JwtPayload | null) => {
@@ -144,6 +156,14 @@ const setFinishedReading = async (id: string, ownerInfo: JwtPayload | null) => {
     {
       $pull: { wishlist: id, planToReadSoon: id, currentlyReading: id },
     }
+  )
+}
+const addReview = async (id: string, review: string) => {
+  await Book.updateOne(
+    {
+      _id: id,
+    },
+    { $addToSet: { reviews: review } }
   )
 }
 
@@ -157,4 +177,5 @@ export const BookService = {
   addToCurrentlyReading,
   addToPlanToReadSoon,
   setFinishedReading,
+  addReview,
 }

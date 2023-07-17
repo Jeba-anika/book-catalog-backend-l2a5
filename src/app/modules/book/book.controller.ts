@@ -111,6 +111,16 @@ const setFinishedReading = catchAsync(async (req: Request, res: Response) => {
     message: 'Removed from wishlist',
   })
 })
+const addReview = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params.id
+  const { review } = req.body
+  await BookService.addReview(id, review)
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Review added',
+  })
+})
 
 export const BookController = {
   createBook,
@@ -122,4 +132,5 @@ export const BookController = {
   addToCurrentlyReading,
   addToPlanToReadSoon,
   setFinishedReading,
+  addReview,
 }

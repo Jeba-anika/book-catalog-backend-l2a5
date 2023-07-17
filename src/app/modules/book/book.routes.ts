@@ -27,6 +27,11 @@ router.post(
   auth(ENUM_USER_ROLES.USER),
   BookController.setFinishedReading
 )
+router.post(
+  '/addReview/:id',
+  auth(ENUM_USER_ROLES.USER),
+  BookController.addReview
+)
 router.post('/', auth(ENUM_USER_ROLES.USER), BookController.createBook)
 router.get('/', BookController.getAllBooks)
 

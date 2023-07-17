@@ -13,19 +13,19 @@ const userSchema = new Schema<IUser>(
     wishlist: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Book',
+        ref: 'Books',
       },
     ],
     currentlyReading: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Book',
+        ref: 'Books',
       },
     ],
     planToReadSoon: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Book',
+        ref: 'Books',
       },
     ],
   },

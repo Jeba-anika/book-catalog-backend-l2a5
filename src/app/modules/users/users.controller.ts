@@ -50,8 +50,22 @@ const userRefreshToken = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+const getUser = catchAsync(async (req: Request, res: Response) => {
+  const userInfo = req.user
+
+  const result = await UserService.getUser(userInfo)
+
+  sendResponse<IUser>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User fetched successfully !',
+    data: result,
+  })
+})
+
 export const UserController = {
   createUser,
   userLogin,
   userRefreshToken,
+  getUser,
 }
