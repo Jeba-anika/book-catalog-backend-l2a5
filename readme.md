@@ -6,18 +6,22 @@
 
 ### Auth (User)
 
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/auth/login (POST)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/auth/signup (POST)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/auth/refresh-token (POST)
-
-### Auth (Admin)
-
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/admins/create-admin (POST)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/admins/login (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/auth/login (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/auth/signup (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/auth/refresh-token (POST)
 
 ### User
 
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/users (GET) => login with admin
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/user/64b4e378beb6f1e2b71f938e (GET)
+
+```json
+{
+  "email": "jeba1234@mail.com",
+  "password": "123456"
+}
+```
+
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/users/649c95c2c212baaf627d93ed (PATCH) => login with admin
 
 ```json
 {
@@ -26,7 +30,7 @@
 }
 ```
 
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/users/649c95c2c212baaf627d93ed (Single GET) => login with admin
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/users/649c99a4d2243fded5602ea3 (DELETE) => login with admin
 
 ```json
 {
@@ -35,48 +39,15 @@
 }
 ```
 
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/users/649c95c2c212baaf627d93ed (PATCH) => login with admin
+#### Books
 
-```json
-{
-  "phoneNumber": "01871889317",
-  "password": "123456"
-}
-```
-
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/users/649c99a4d2243fded5602ea3 (DELETE) => login with admin
-
-```json
-{
-  "phoneNumber": "01871889317",
-  "password": "123456"
-}
-```
-
-#### Cows
-
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/cows (POST)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/cows (GET)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/cows/649b35f83ee34f2722ae60af (Single GET)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/cows/649c9a80c212baaf627d9400 (PATCH)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/cows/649c9ba8c212baaf627d940e (DELETE)
-
-#### Orders
-
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/orders (POST)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/orders (GET)
-
-## Bonus Part
-
-#### Admin
-
--Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/admins/create-admin (POST)
-
-#### My Profile
-
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/users/my-profile (GET)
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/users/my-profile (PATCH)
-
-#### Order:
-
-- Route: https://online-cow-hut-auth-lime.vercel.app/api/v1/orders/649c1a08ee5402d6b922c86a (GET)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books (GET)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/64b4e360beb6f1e2b71f9386 (Single GET)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/64b4e360beb6f1e2b71f9386 (PATCH)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/64b4e360beb6f1e2b71f9386 (DELETE)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/addToWishlist/64b4e360beb6f1e2b71f9386 (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/addToCurrentlyReading/64b4e360beb6f1e2b71f9386 (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/addToPlanToReadSoon/64b4e360beb6f1e2b71f9386 (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/finishedReading/64b4e360beb6f1e2b71f9386 (POST)
+- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/books/addReview/64b4e360beb6f1e2b71f9386 (POST)
