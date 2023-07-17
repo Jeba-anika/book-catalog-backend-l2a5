@@ -1,4 +1,4 @@
-import { JwtPayload, Secret } from 'jsonwebtoken'
+import { Secret } from 'jsonwebtoken'
 import config from '../../../config'
 import ApiError from '../../../errors/ApiError'
 import { jwtHelpers } from '../../../helpers/jwtHelpers'
@@ -79,8 +79,10 @@ const userRefreshToken = async (
     accessToken: newAccessToken,
   }
 }
-const getUser = async (userInfo: JwtPayload | null): Promise<IUser | null> => {
-  const result = await User.findOne({ id: userInfo?._id }).populate('wishlist')
+const getUser = async (id: string): Promise<IUser | null> => {
+  const result = await User.findById(id)
+    .populate('wishlist')
+    .populate('currentlyReading')
   return result
 }
 

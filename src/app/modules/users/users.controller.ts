@@ -51,9 +51,9 @@ const userRefreshToken = catchAsync(async (req: Request, res: Response) => {
 })
 
 const getUser = catchAsync(async (req: Request, res: Response) => {
-  const userInfo = req.user
+  const id = req.params.id
 
-  const result = await UserService.getUser(userInfo)
+  const result = await UserService.getUser(id)
 
   sendResponse<IUser>(res, {
     statusCode: 200,

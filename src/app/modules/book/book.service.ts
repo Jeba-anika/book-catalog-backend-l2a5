@@ -108,13 +108,6 @@ const deleteBook = async (id: string, ownerInfo: JwtPayload | null) => {
 
 const addToWishlist = async (id: string, ownerInfo: JwtPayload | null) => {
   const book = await Book.findById(id)
-  // const user = await User.findById(ownerInfo?._id)
-  // if (book && user) {
-  //   user?.wishlist?.push(book)
-  //   user.save()
-  // } else {
-  //   throw new ApiError(401, 'Some error occurred')
-  // }
   await User.updateOne(
     {
       _id: ownerInfo?._id,
@@ -149,14 +142,23 @@ const addToPlanToReadSoon = async (
   )
 }
 const setFinishedReading = async (id: string, ownerInfo: JwtPayload | null) => {
+  const user = await User.findById(ownerInfo?._id)
+  console.log(user)
+  //const book = await Book.findById(id)
   await User.updateOne(
     {
       _id: ownerInfo?._id,
     },
     {
-      $pull: { wishlist: id, planToReadSoon: id, currentlyReading: id },
+      $pull: {
+        wishlist: { $in: [id] },
+        planToReadSoon: { $in: [id] },
+        currentlyReading: { $in: [id] },
+      },
     }
   )
+  const user1 = await User.findById(ownerInfo?._id)
+  console.log(user1)
 }
 const addReview = async (id: string, review: string) => {
   await Book.updateOne(
