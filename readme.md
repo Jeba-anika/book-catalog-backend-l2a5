@@ -1,8 +1,6 @@
-### Live Link: https://online-cow-hut-auth-lime.vercel.app
+### Live Link: https://book-catalog-backend-ruby.vercel.app
 
 ### Application Routes:
-
-## Main part
 
 ### Auth (User)
 
@@ -17,24 +15,6 @@
 ```json
 {
   "email": "jeba1234@mail.com",
-  "password": "123456"
-}
-```
-
-- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/users/649c95c2c212baaf627d93ed (PATCH) => login with admin
-
-```json
-{
-  "phoneNumber": "01871889317",
-  "password": "123456"
-}
-```
-
-- Route: https://book-catalog-backend-ruby.vercel.app/api/v1/users/649c99a4d2243fded5602ea3 (DELETE) => login with admin
-
-```json
-{
-  "phoneNumber": "01871889317",
   "password": "123456"
 }
 ```
